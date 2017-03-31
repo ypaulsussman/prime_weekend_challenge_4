@@ -12,7 +12,10 @@
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "grunt": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^2.2.1",
     "jquery": "^3.2.1",
+    "load-grunt-tasks": "^3.5.2",
     "mongoose": "^4.9.2"
   }
 }
