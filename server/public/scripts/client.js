@@ -54,10 +54,11 @@ function addListing() {
   }
   $.ajax({
     type: "POST",
-    url: "/newListing",
+    url: "/listings",
     data: newListing,
     success: function(response){
-      getListings(response);
+      console.log(response);
+      getListings();
     }
   });
 }
