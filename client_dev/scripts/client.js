@@ -1,6 +1,15 @@
 $(document).ready(function() {
   getListings();
+  eventListeners(true);
 });
+
+function eventListeners(value) {
+  if (true) {
+    $('#sellHome').on('submit', addListing);
+  }else {
+
+  }
+}
 
 function getListings() {
   console.log("jquery's running");
@@ -29,4 +38,26 @@ function appendListings(response) {
     }
     // response[i]
   }
+}
+
+function addListing() {
+  event.preventDefault();
+  console.log('button works!');
+  var newListing = {
+    city : $('#location').val(),
+    sqft : $('#squareFeet').val(),
+  };
+  if ($('#rent').val()) {
+    newListing.rent = $('#rent').val();
+  } else if ($('#cost').val()) {
+    newListing.cost = $('#cost').val();
+  }
+  $.ajax({
+    type: "POST",
+    url: "/newListing",
+    data: newListing,
+    success: function(response){
+      getListings(response);
+    }
+  });
 }
