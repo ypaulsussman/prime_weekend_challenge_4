@@ -1,7 +1,15 @@
 $(document).ready(function() {
-  getProperties();
+  getListings();
 });
 
-function getProperties() {
+function getListings() {
   console.log("jquery's running");
+  $.ajax({
+  type: "GET",
+  url: "/listings",
+  success: function(response) {
+    console.log("successful call");
+    console.log(response);
+  }
+});
 }

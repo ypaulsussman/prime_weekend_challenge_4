@@ -1,8 +1,17 @@
+//node requires
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var path = require('path');
 
+//mongo requires
+var listings = require('./modules/listings.js');
+var mongoose = require('mongoose');
+var mongoURI = "mongodb://localhost:27017/realestate";
+var mongoDB = mongoose.connect(mongoURI).connection;
+
+
+//server setup
 app.set("port", (process.env.PORT || 7000));
 
 app.use(express.static('server/public'));
@@ -15,4 +24,15 @@ app.get('/', function(req, res) {
 
 app.listen(app.get("port"), function() {
   console.log('Now listening on port: ', app.get("port"));
+});
+
+//MongoDB connection
+app.use("/listings", listings);
+
+mongoDB.on("error", function(err) {
+  console.log("mongo connection error: ", err);
+});
+
+mongoDB.once("open", function() {
+  console.log("connected to mongo!!!");
 });
