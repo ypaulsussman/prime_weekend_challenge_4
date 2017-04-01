@@ -1,3 +1,12 @@
+var adjArray = ["pretty", "alluring", "lovely", "charming", "delightful", "appealing", "engaging", "winsome", "ravishing", "gorgeous", "stunning", "arresting", "glamorous", "bewitching", "beguiling", "graceful", "elegant", "exquisite", "aesthetic", "artistic", "decorative", "magnificent", "divine", "gorgeous", "beauteous", "comely", "fair"];
+var adjective;
+var index;
+function getRandomAdjIndex(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 $(document).ready(function() {
   if(window.location.pathname ==='/'){
     getListings();
@@ -35,16 +44,34 @@ function getListings() {
 function appendListings(response) {
   $('.basket.container').empty();
   for (var i = 0; i < response.length; i++) {
-    $('.basket.container').append('<div class="row" id="property'+ i + '"></div>');
+    var $row;
+    if (i%2===1) {
+      $('.basket.container').append('<div class="row" id="row'+ i + '"></div>');
+      $row = $('#row'+i);
+      $row.append('<div class="col-md-4 col-md-offset-1" id="property'+ i + '"></div>');
+    } else if (i%2===0) {
+      $row = $('#row'+(i-1));
+      $row.append('<div class="col-md-4 col-md-offset-2" id="property'+ i + '"></div>');
+    }
     var $el = $('#property'+i);
-    $el.append('<div class="col-md-4"><p>'+response[i].sqft+' square feet!</p></div>');
-    $el.append('<div class="col-md-4"><p>Located in sunny '+response[i].city+'!</p></div>');
     if (response[i].cost) {
-      $el.append('<div class="col-md-4"><p>Only $'+response[i].cost+' to own!</p></div>');
+      $el.append('<div class="col-md-2 glyph-holder"><span class="glyphicon glyphicon-home"></span></div>');
     }else if (response[i].rent) {
-      $el.append('<div class="col-md-4"><p>Only $'+response[i].rent+' a month!</p></div>');
+      $el.append('<div class="col-md-2 glyph-holder"><span class="glyphicon glyphicon-tower"></span></div>');
+    }
+    index = getRandomAdjIndex(0, adjArray.length);
+    adjective = adjArray[index];
+    $el.append('<div class="col-md-7 location"><p>Located in '+ adjective +' '+response[i].city+'!</p></div>');
+    var size = response[i].sqft+' square feet!';
+    if (response[i].cost) {
+      var cost = 'Only $'+response[i].cost+' to own!';
+      $el.append('<button type="button" class="btn btn-sm btn-success cost col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+cost+'">Learn More!</button>');
+    }else if (response[i].rent) {
+      var rent = 'Only $'+response[i].rent+' a month!';
+      $el.append('<button type="button" class="btn btn-sm btn-success rent col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+rent+'">Learn More!</button>');
     }
 
+    //
     // $el.append('<div class="col-md-4"><p>'+response[i].sqft+' square feet!</p></div>');
     // $el.append('<div class="col-md-4"><p>Located in sunny '+response[i].city+'!</p></div>');
     // if (response[i].cost) {
@@ -53,6 +80,10 @@ function appendListings(response) {
     //   $el.append('<div class="col-md-4"><p>Only $'+response[i].rent+' a month!</p></div>');
     // }
   }
+  $(function () {
+    $('[data-toggle="popover"]').popover();
+  });
+  // $('[data-toggle="popover"]').popover();
 }
 
 function addListing() {

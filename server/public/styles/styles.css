@@ -5,12 +5,14 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 h1{
-  background-color: teal;
+  font-size: 5em;
+  font-family: Tahoma, Geneva, sans-serif;
+  text-align: center;
+  margin-bottom: .5em;
+  color: aliceblue;
+  text-shadow: 1px 1px 10px DarkOrange, -1px -1px 20px DeepPink;
 }
 
-h2 {
-  background-color: salmon;
-}
 
 .container {
 }
@@ -40,4 +42,47 @@ h2 {
 .body-sell{
   background-image: url('../vendors/pexels-photo-186077.jpeg');
   background-size: cover;
+}
+
+[id*="property"]{
+  display: inline-flex;
+  margin-bottom: 1.5em;
+  background-color: rgba(240,248,255,.6);
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: -5px -5px 25px DeepPink, 5px 5px 25px DeepPink;
+  /*height: 6em;*/
+;
+}
+
+.body-listings{
+  background-image: url('../vendors/Narrow_tower_apartment_house_47st_8th_av_jeh.jpg');
+  background-size: cover;
+}
+
+.glyph-holder{
+  margin: auto;
+}
+
+.location{
+  margin: auto;
+  font-family: Tahoma, Geneva, sans-serif;
+  /*font-weight: bold;*/
+  font-size: 1.25em;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+.col-md-2 .glyphicon{
+  color: DeepPink;
+  font-size: 2em;
+}
+
+.btn-success.rent,.btn-success.cost{
+  color: #373b42;
+  font-style: oblique;
+  font-size: 1em;
+  text-indent: -.5em;
+  font-family: Tahoma, Geneva, sans-serif;
+  text-shadow: 1px 1px 10px DeepPink, 1px 1px 30px DarkOrange;
 }
