@@ -1,5 +1,7 @@
 $(document).ready(function() {
-  getListings();
+  if(window.location.pathname ==='/'){
+    getListings();
+  }
   eventListeners(true);
 });
 
@@ -18,7 +20,7 @@ function eventListeners(value) {
 }
 
 function getListings() {
-  console.log("jquery's running");
+  console.log("getting listings");
   $.ajax({
   type: "GET",
   url: "/listings",
@@ -42,12 +44,20 @@ function appendListings(response) {
     }else if (response[i].rent) {
       $el.append('<div class="col-md-4"><p>Only $'+response[i].rent+' a month!</p></div>');
     }
+
+    // $el.append('<div class="col-md-4"><p>'+response[i].sqft+' square feet!</p></div>');
+    // $el.append('<div class="col-md-4"><p>Located in sunny '+response[i].city+'!</p></div>');
+    // if (response[i].cost) {
+    //   $el.append('<div class="col-md-4"><p>Only $'+response[i].cost+' to own!</p></div>');
+    // }else if (response[i].rent) {
+    //   $el.append('<div class="col-md-4"><p>Only $'+response[i].rent+' a month!</p></div>');
+    // }
   }
 }
 
 function addListing() {
   event.preventDefault();
-  console.log('button works!');
+  console.log('submit button works!');
   var newListing = {
     city : $('#location').val(),
     sqft : $('#squareFeet').val(),
@@ -61,9 +71,12 @@ function addListing() {
     type: "POST",
     url: "/listings",
     data: newListing,
-    success: function(response){
-      console.log(response);
-      getListings();
+    success: function(){
+      $('#rent').val('');
+      $('#cost').val('');
+      $('#location').val('');
+      $('#squareFeet').val('');
+      //stretch goal: include "thanks for submitting! now go get a newer, bigger home" modal
     }
   });
 }

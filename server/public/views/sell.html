@@ -9,13 +9,13 @@
     <!-- <script src="../scripts/client.min.js" charset="utf-8"></script> -->
     <script src="../scripts/client.js" charset="utf-8"></script>
   </head>
-  <body>
+  <body class="body-sell">
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse">
       <div class="container">
         <div class="navbar-header">
           <div class="navbar-brand">
-            <span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-tower"></span>
           </div>
           <ul class="nav navbar-nav">
             <li><a href="/">Current Listings</a></li>
@@ -26,9 +26,7 @@
       </div>
     </nav>
 
-    <h1>Sussman Homes and Gardens</h1>
-    <h2>Sell Your Home!</h2>
-    <div class="container">
+    <div class="container form-contain">
       <form class="form-horizontal" id="sellHome">
         <div class="form-group">
           <label for="location" class="col-sm-6 control-label">Where is your home located?</label>
@@ -48,11 +46,10 @@
           <input type="number" class="col-sm-6" name="cost" id="cost" placeholder="Total Cost">
         </div>
         <div class="form-group">
-          <label for="location" class="col-sm-6 control-label">Now let's sell that house!</label>
+          <label for="location" class="col-sm-6 control-label" id="submitLabel">Now let's sell that house!</label>
           <input type="submit" class="btn btn-success col-sm-6" id="submitButton" value="Submit!">
         </div>
         <button type="button" class="btn btn-secondary btn-xs" id="resetSell">Reset form</button>
-        <!-- don't forget validation of rent vs cost! -->
       </form>
     </div>
 
