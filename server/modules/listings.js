@@ -25,7 +25,7 @@ var Houses = mongoose.model('House', HouseSchema, 'listings');
 var Apartments = mongoose.model('Apartment', AptSchema, 'listings');
 
 router.get('/',function(req,res) {
-  Houses.find(function(err, allListings) {
+  Apartments.find(function(err, allListings) {
     if (err) {
       console.log(err);
       res.sendStatus(500);

@@ -1,3 +1,20 @@
+h1{
+  background-color: teal;
+}
+
 h2 {
   background-color: salmon;
+}
+
+.container {
+  background-color: skyblue;
+}
+
+#sellHome{
+  margin: auto;
+  width: 50%;
+}
+
+.form-horizontal .control-label{
+  text-align: left;
 }

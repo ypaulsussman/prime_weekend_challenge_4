@@ -29,6 +29,9 @@ module.exports = function(grunt) {
       }
     },//end copy
     watch: {
+      options: {
+        livereload: true,
+      },
       files: ['client_dev/scripts/*.js', 'client_dev/views/*.html', 'client_dev/styles/*.css'],
       tasks: ['uglify', 'copy']
     }//end watch

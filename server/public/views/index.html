@@ -3,28 +3,34 @@
   <head>
     <meta charset="utf-8">
     <title>Sussman Homes</title>
+    <link rel="stylesheet" href="../vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/styles.css">
     <script src="../vendors/jquery.min.js" charset="utf-8"></script>
     <!-- <script src="../scripts/client.min.js" charset="utf-8"></script> -->
     <script src="../scripts/client.js" charset="utf-8"></script>
   </head>
   <body>
-    <h1>Sussman Homes and Gardens</h1>
-    <h2>Sell Your Home!</h2>
-    <form id="sellHome">
-      <input type="text" name="location" id="location" placeholder="What city?">
-      <br><br>
-      <input type="number" name="squareFeet" id="squareFeet" placeholder="How many square feet?">
-      <br><br>
-      <input type="number" name="rent" id="rent" placeholder="How much to rent?">
-      <span>OR</span>
-      <input type="number" name="cost" id="cost" placeholder="How much to buy?">
-      <input type="submit" id="submitButton" value="submit">
-    </form>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <div class="navbar-brand">
+            <span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Current Listings</a></li>
+            <li><a href="/sell">Sell Your Home!</a></li>
+            <li><a href="#">Admin</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
+
+    <h1>Sussman Homes and Gardens</h1>
     <h2>Current Listings</h2>
     <div class="basket container">
 
     </div>
-
+    <script src="//localhost:35729/livereload.js"></script>
   </body>
 </html>

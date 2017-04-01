@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sussman Homes</title>
+    <link rel="stylesheet" href="../vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <script src="../vendors/jquery.min.js" charset="utf-8"></script>
+    <!-- <script src="../scripts/client.min.js" charset="utf-8"></script> -->
+    <script src="../scripts/client.js" charset="utf-8"></script>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <div class="navbar-brand">
+            <span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="/">Current Listings</a></li>
+            <li class="active"><a href="/sell">Sell Your Home!</a></li>
+            <li><a href="#">Admin</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <h1>Sussman Homes and Gardens</h1>
+    <h2>Sell Your Home!</h2>
+    <div class="container">
+      <form class="form-horizontal" id="sellHome">
+        <div class="form-group">
+          <label for="location" class="col-sm-6 control-label">Where is your home located?</label>
+          <input type="text" class="col-sm-6" name="location" id="location" placeholder="City or Neighborhood">
+        </div>
+        <div class="form-group">
+          <label for="location" class="col-sm-6 control-label">How big is your home?</label>
+          <input type="number" class="col-sm-6" name="squareFeet" id="squareFeet" placeholder="Square Footage">
+        </div>
+        <div class="form-group rent-form">
+          <label for="location" class="col-sm-6 control-label">How much to rent it?</label>
+          <input type="number" class="col-sm-6" name="rent" id="rent" placeholder="Monthly Rate">
+        </div>
+        <span id="or-tag">OR</span>
+        <div class="form-group cost-form">
+          <label for="location" class="col-sm-6 control-label">How much to buy it?</label>
+          <input type="number" class="col-sm-6" name="cost" id="cost" placeholder="Total Cost">
+        </div>
+        <div class="form-group">
+          <label for="location" class="col-sm-6 control-label">Now let's sell that house!</label>
+          <input type="submit" class="btn btn-success col-sm-6" id="submitButton" value="Submit!">
+        </div>
+        <button type="button" class="btn btn-secondary btn-xs" id="resetSell">Reset form</button>
+        <!-- don't forget validation of rent vs cost! -->
+      </form>
+    </div>
+
+
+    <script src="//localhost:35729/livereload.js"></script>
+  </body>
+</html>
