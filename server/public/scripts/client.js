@@ -43,8 +43,8 @@ function getListings() {
 
 function appendListings(response) {
   $('.basket.container').empty();
-  for (var i = 0; i < response.length; i++) {
-    var $row;
+  var $row;
+  for (var i = 0; i < 24; i++) {
     if (i%2===1) {
       $('.basket.container').append('<div class="row" id="row'+ i + '"></div>');
       $row = $('#row'+i);
@@ -65,25 +65,16 @@ function appendListings(response) {
     var size = response[i].sqft+' square feet!';
     if (response[i].cost) {
       var cost = 'Only $'+response[i].cost+' to own!';
-      $el.append('<button type="button" class="btn btn-sm btn-success cost col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+cost+'">Learn More!</button>');
+      $el.append('<button type="button" class="btn btn-sm btn-info cost col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+cost+'">Learn More!</button>');
     }else if (response[i].rent) {
       var rent = 'Only $'+response[i].rent+' a month!';
-      $el.append('<button type="button" class="btn btn-sm btn-success rent col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+rent+'">Learn More!</button>');
+      $el.append('<button type="button" class="btn btn-sm btn-info rent col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+rent+'">Learn More!</button>');
     }
-
-    //
-    // $el.append('<div class="col-md-4"><p>'+response[i].sqft+' square feet!</p></div>');
-    // $el.append('<div class="col-md-4"><p>Located in sunny '+response[i].city+'!</p></div>');
-    // if (response[i].cost) {
-    //   $el.append('<div class="col-md-4"><p>Only $'+response[i].cost+' to own!</p></div>');
-    // }else if (response[i].rent) {
-    //   $el.append('<div class="col-md-4"><p>Only $'+response[i].rent+' a month!</p></div>');
-    // }
   }
   $(function () {
     $('[data-toggle="popover"]').popover();
+    $row.append('<div class="col-md-4 col-md-offset-2"><button type="submit" class="btn btn-primary" id="nextPageButton"><span id="npbText">More Super Deals!</span></button></div>');
   });
-  // $('[data-toggle="popover"]').popover();
 }
 
 function addListing() {

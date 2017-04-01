@@ -11,10 +11,7 @@ h1{
   margin-bottom: .5em;
   color: aliceblue;
   text-shadow: 1px 1px 10px DarkOrange, -1px -1px 20px DeepPink;
-}
-
-
-.container {
+  font-style: oblique;
 }
 
 #sellHome{
@@ -47,11 +44,11 @@ h1{
 [id*="property"]{
   display: inline-flex;
   margin-bottom: 1.5em;
-  background-color: rgba(240,248,255,.6);
+  background-color: rgba(255,140,0,.75);
   border-radius: 5px;
   padding: 20px;
   box-shadow: -5px -5px 25px DeepPink, 5px 5px 25px DeepPink;
-  /*height: 6em;*/
+  min-height: 8em;
 ;
 }
 
@@ -67,10 +64,9 @@ h1{
 .location{
   margin: auto;
   font-family: Tahoma, Geneva, sans-serif;
-  /*font-weight: bold;*/
   font-size: 1.25em;
-  padding-left: 1em;
   text-indent: -1em;
+  text-align: right;
 }
 
 .col-md-2 .glyphicon{
@@ -78,11 +74,33 @@ h1{
   font-size: 2em;
 }
 
-.btn-success.rent,.btn-success.cost{
-  color: #373b42;
+.btn-info.rent,.btn-info.cost{
+  color: #fffbe8;
   font-style: oblique;
   font-size: 1em;
   text-indent: -.5em;
   font-family: Tahoma, Geneva, sans-serif;
   text-shadow: 1px 1px 10px DeepPink, 1px 1px 30px DarkOrange;
+}
+
+.popover-title {
+    font-style: oblique;
+    color: DeepPink;
+    font-size: 2em;
+    min-width: 200px;
+}
+.popover-content {
+    font-size: .75em;
+    color: DarkOrange;
+    min-width: 200px;
+}
+
+#nextPageButton{
+  float: right;
+  min-height: 8em;
+  width: 100%
+}
+
+#npbText{
+  font-size: 2em;
 }
