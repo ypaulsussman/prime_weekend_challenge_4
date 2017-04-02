@@ -1,13 +1,5 @@
-var adjArray = ["pretty", "alluring", "lovely", "charming", "delightful", "appealing", "engaging", "winsome", "ravishing", "gorgeous", "stunning", "arresting", "glamorous", "bewitching", "beguiling", "graceful", "elegant", "exquisite", "aesthetic", "artistic", "decorative", "magnificent", "divine", "gorgeous", "beauteous", "comely", "fair"];
-var adjective;
-var index;
-function getRandomAdjIndex(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
 $(document).ready(function() {
+  //ensures db call is made only on "listings" page
   if(window.location.pathname ==='/'){
     getListings();
   }
@@ -21,11 +13,13 @@ function eventListeners(value) {
     $('#cost').on('keypress', hideRent);
     $('#resetSell').on('click', reload);
     $('.basket.container').on('click','#nextPageButton', nextPage);
+    $('#adminAuth').on('submit', navToAdmin);
   }else {
     $('#sellHome').off('submit', addListing);
-    $('#rent').on('keypress', hideCost);
-    $('#cost').on('keypress', hideRent);
-    $('#resetSell').on('click', reload);
+    $('#rent').off('keypress', hideCost);
+    $('#cost').off('keypress', hideRent);
+    $('#resetSell').off('click', reload);
+    $('#adminAuth').off('submit', navToAdmin);
   }
 }
 
@@ -42,10 +36,22 @@ function getListings() {
 });
 }
 
+//generates random adjective to prefix building location
+var adjArray = ["pretty", "alluring", "lovely", "charming", "delightful", "appealing", "engaging", "winsome", "ravishing", "gorgeous", "stunning", "arresting", "glamorous", "bewitching", "beguiling", "graceful", "elegant", "exquisite", "aesthetic", "artistic", "decorative", "magnificent", "divine", "gorgeous", "beauteous", "comely", "fair"];
+var adjective;
+var index;
+function getRandomAdjIndex(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 function appendListings(response) {
+  //refreshes container
   $('.basket.container').empty();
   var $row;
   for (var i = 0; i < 24; i++) {
+    //creates one row for each two listings
     if (i%2===1) {
       $('.basket.container').append('<div class="row" id="row'+ i + '"></div>');
       $row = $('#row'+i);
@@ -54,15 +60,18 @@ function appendListings(response) {
       $row = $('#row'+(i-1));
       $row.append('<div class="col-md-4 col-md-offset-2" id="property'+ i + '"></div>');
     }
+    //adds house or "list/kind-of-apartment-if-you-look-at-it-right" glyphicon to listing
     var $el = $('#property'+i);
     if (response[i].cost) {
       $el.append('<div class="col-md-2 glyph-holder"><span class="glyphicon glyphicon-home"></span></div>');
     }else if (response[i].rent) {
       $el.append('<div class="col-md-2 glyph-holder"><span class="glyphicon glyphicon-list-alt"></span></div>');
     }
+    //adds location text
     index = getRandomAdjIndex(0, adjArray.length);
     adjective = adjArray[index];
     $el.append('<div class="col-md-7 location"><p>Located in '+ adjective +' '+response[i].city+'!</p></div>');
+    //adds popover button for size & price
     var size = response[i].sqft+' square feet!';
     if (response[i].cost) {
       var cost = 'Only $'+response[i].cost+' to own!';
@@ -72,6 +81,7 @@ function appendListings(response) {
       $el.append('<button type="button" class="btn btn-sm btn-info rent col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+rent+'">Learn More!</button>');
     }
   }
+  //adds button to display more listings
   $(function () {
     $('[data-toggle="popover"]').popover();
     $row.append('<div class="col-md-4 col-md-offset-2"><button type="submit" class="btn btn-primary" id="nextPageButton"><span id="npbText">More Super Deals!</span></button></div>');
@@ -79,44 +89,63 @@ function appendListings(response) {
   });
 }
 
+
 function addListing() {
   event.preventDefault();
   console.log('submit button works!');
-  var newListing = {
-    city : $('#location').val(),
-    sqft : $('#squareFeet').val(),
-  };
-  if ($('#rent').val()) {
-    newListing.rent = $('#rent').val();
-  } else if ($('#cost').val()) {
-    newListing.cost = $('#cost').val();
-  }
-  $.ajax({
-    type: "POST",
-    url: "/listings",
-    data: newListing,
-    success: function(){
-      $('#rent').val('');
-      $('#cost').val('');
-      $('#location').val('');
-      $('#squareFeet').val('');
-      //stretch goal: include "thanks for submitting! now go get a newer, bigger home" modal
+  //validates all fields filled
+  if ($('#location').val() && $('#squareFeet').val() && $('#rent').val() || $('#location').val() && $('#squareFeet').val() && $('#cost').val()) {
+    //creates object for ajax call
+    var newListing = {
+      city : $('#location').val(),
+      sqft : $('#squareFeet').val(),
+    };
+    if ($('#rent').val()) {
+      newListing.rent = $('#rent').val();
+    } else if ($('#cost').val()) {
+      newListing.cost = $('#cost').val();
     }
-  });
+    //ajax call
+    $.ajax({
+      type: "POST",
+      url: "/listings",
+      data: newListing,
+      success: function(){
+        //resets form fields
+        $('#rent').val('');
+        $('#cost').val('');
+        $('#location').val('');
+        $('#squareFeet').val('');
+        alertify.alert("Sussman Homes and Gardens says:","Thanks for submitting your home!", function() {
+          alertify.success('Listing added!');
+        });//end alertify
+      }//end success-function
+    });//end ajax
+  } else {
+    alertify.alert("Sussman Homes and Gardens says:","Please complete all fields.", function() {
+      alertify.error('Listing not added');
+    });//end alertify
+  }
 }
 
+//removes "cost" or "rent" field -- for when opposite field is activated
 function hideCost() {
   $('.cost-form, #or-tag').remove();
 }
-
 function hideRent() {
   $('.rent-form, #or-tag').remove();
 }
 
+//refreshes page -- for when "reset form" is hit on sell page
 function reload() {
   window.location.reload(true);
 }
 
+//stub for "click for more offers" button on listings page
 function nextPage() {
   window.alert("Over one weekend? On Week FOUR?! Nah man... sorry...");
+}
+
+function navToAdmin() {
+  
 }
