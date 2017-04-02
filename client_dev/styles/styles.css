@@ -79,13 +79,13 @@ h1{
   font-size: 2em;
 }
 
-.btn-success.rent,.btn-success.cost{
+.btn-info.rent,.btn-info.cost{
   font-style: oblique;
   font-size: 1em;
   text-indent: -.5em;
   font-family: Tahoma, Geneva, sans-serif;
-  /*color: #fffbe8;
-  text-shadow: 1px 1px 10px DeepPink, 1px 1px 30px DarkOrange;*/
+  color: #fffbe8;
+  text-shadow: 1px 1px 10px DeepPink, 1px 1px 30px DarkOrange;
 }
 
 .popover-title {

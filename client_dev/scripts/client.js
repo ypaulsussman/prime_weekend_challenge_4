@@ -66,10 +66,10 @@ function appendListings(response) {
     var size = response[i].sqft+' square feet!';
     if (response[i].cost) {
       var cost = 'Only $'+response[i].cost+' to own!';
-      $el.append('<button type="button" class="btn btn-sm btn-success cost col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+cost+'">Learn More!</button>');
+      $el.append('<button type="button" class="btn btn-sm btn-info cost col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+cost+'">Learn More!</button>');
     }else if (response[i].rent) {
       var rent = 'Only $'+response[i].rent+' a month!';
-      $el.append('<button type="button" class="btn btn-sm btn-success rent col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+rent+'">Learn More!</button>');
+      $el.append('<button type="button" class="btn btn-sm btn-info rent col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+rent+'">Learn More!</button>');
     }
   }
   $(function () {
