@@ -54,9 +54,16 @@ router.post('/',function(req,res) {
   });
 });
 
-
-
-
-
+router.delete('/',function(req,res) {
+  console.log(req.body);
+  var id = req.body.id;
+  Apartments.findByIdAndRemove(id, function(err, deletedBuilding) {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+    res.send(deletedBuilding);
+  });
+});
 
 module.exports = router;

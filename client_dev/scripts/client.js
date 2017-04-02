@@ -13,6 +13,7 @@ function eventListeners(value) {
     $('#cost').on('keypress', hideRent);
     $('#resetSell').on('click', reload);
     $('.basket.container').on('click','#nextPageButton', nextPage);
+    $('.admin-container').on('click', '.delete', deleteListing);
   }else {
     $('#sellHome').off('submit', addListing);
     $('#rent').off('keypress', hideCost);
@@ -48,6 +49,7 @@ function getRandomAdjIndex(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+//adds content to 'listings' page
 function appendListings(response) {
   //refreshes container
   $('.basket.container').empty();
@@ -91,7 +93,24 @@ function appendListings(response) {
   });
 }//end appendListings
 
+//adds content to 'admin' page
+function adminAppend(response) {
+  console.log("adminAppend is working");
+  $('.admin-container').empty();
+  for (var i = 0; i < response.length; i++) {
+      $('.admin-container.container').append('<div class="row" id="propAdminView' + i + '"></div>');
+      var $el = $('#propAdminView' + i);
+      $el.append('<div class="col-md-3 admin-div"><p>' + response[i].sqft + ' square feet</p></div>');
+      $el.append('<div class="col-md-3 admin-div"><p>Located in ' + response[i].city + '</p></div>');
+      if (response[i].cost) {
+          $el.append('<div class="col-md-3 admin-div"><p>Cost to own: $' + response[i].cost + '</p></div>');
+      } else if (response[i].rent) {
+          $el.append('<div class="col-md-3 admin-div"><p>Monthly rent: $' + response[i].rent + '</p></div>');}
+      $el.append('<div class="col-md-3 admin-div"><button class="delete btn btn-sm btn-warning" data-buildingid="'+ response[i]._id+'">Delete</button></div>');
+   }//end for-loop
+ }//end adminAppend
 
+//adds new property to db
 function addListing() {
   event.preventDefault();
   console.log('submit button works!');
@@ -148,17 +167,20 @@ function nextPage() {
   window.alert("Over one weekend? On Week FOUR?! Nah man... sorry...");
 }
 
-function adminAppend(response) {
-  console.log("adminAppend is working");
-  for (var i = 0; i < response.length; i++) {
-      $('.admin-container.container').append('<div class="row" id="propAdminView' + i + '"></div>');
-      var $el = $('#propAdminView' + i);
-      $el.append('<div class="col-md-3 admin-div"><p>' + response[i].sqft + ' square feet</p></div>');
-      $el.append('<div class="col-md-3 admin-div"><p>Located in ' + response[i].city + '</p></div>');
-      if (response[i].cost) {
-          $el.append('<div class="col-md-3 admin-div"><p>Cost to own: $' + response[i].cost + '</p></div>');
-      } else if (response[i].rent) {
-          $el.append('<div class="col-md-3 admin-div"><p>Monthly rent: $' + response[i].rent + '</p></div>');}
-      $el.append('<div class="col-md-3 admin-div"><button class="delete btn btn-sm btn-warning" data-buildingid="'+ response[i]._id+'">Delete</button></div>');
-   }//end for-loop
- }//end adminAppend
+function deleteListing() {
+  var delID = $(this).data('buildingid');
+  console.log(delID, " will be deleted");
+  var idObj = {
+      id : delID,
+    };
+  $.ajax({
+    type: "DELETE",
+    url: "/listings",
+    data: idObj,
+    success: function(response) {
+      console.log("delete request returned successfully");
+      console.log(response);
+      getListings();
+    }
+  });
+}
