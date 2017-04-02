@@ -55,6 +55,16 @@ h1{
   /*box-shadow:  -5px -5px 25px #4e5766,  5px 5px 25px #4e5766;*/
 }
 
+[id*="propAdminView"]{
+  min-height: 3em;
+  margin-bottom: 2em;
+  display: flex;
+}
+
+.admin-div{
+  margin: auto;
+}
+
 .body-listings{
   background-image: url('../vendors/Narrow_tower_apartment_house_47st_8th_av_jeh.jpg');
   background-size: cover;

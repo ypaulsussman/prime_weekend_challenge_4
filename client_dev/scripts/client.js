@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  //ensures db call is made only on "listings" page
-  if(window.location.pathname ==='/'){
+  //ensures db call is made only on "listings" and "admin" pages
+  if(window.location.pathname ==='/' || '/admin'){
     getListings();
   }
   eventListeners(true);
@@ -13,15 +13,13 @@ function eventListeners(value) {
     $('#cost').on('keypress', hideRent);
     $('#resetSell').on('click', reload);
     $('.basket.container').on('click','#nextPageButton', nextPage);
-    $('#adminAuth').on('submit', navToAdmin);
   }else {
     $('#sellHome').off('submit', addListing);
     $('#rent').off('keypress', hideCost);
     $('#cost').off('keypress', hideRent);
     $('#resetSell').off('click', reload);
-    $('#adminAuth').off('submit', navToAdmin);
   }
-}
+}//end eventListeners
 
 function getListings() {
   console.log("getting listings");
@@ -31,10 +29,14 @@ function getListings() {
   success: function(response) {
     console.log("successful call");
     console.log(response);
-    appendListings(response);
-  }
-});
-}
+    if(window.location.pathname ==='/'){
+      appendListings(response);
+    } else if (window.location.pathname ==='/admin') {
+      adminAppend(response);
+    }//end elseif
+  }//end success-function
+});//end ajax
+}//end getListings
 
 //generates random adjective to prefix building location
 var adjArray = ["pretty", "alluring", "lovely", "charming", "delightful", "appealing", "engaging", "winsome", "ravishing", "gorgeous", "stunning", "arresting", "glamorous", "bewitching", "beguiling", "graceful", "elegant", "exquisite", "aesthetic", "artistic", "decorative", "magnificent", "divine", "gorgeous", "beauteous", "comely", "fair"];
@@ -87,7 +89,7 @@ function appendListings(response) {
     $row.append('<div class="col-md-4 col-md-offset-2"><button type="submit" class="btn btn-primary" id="nextPageButton"><span id="npbText">More Super Deals!</span></button></div>');
     //stretch goal: get button to do anything beside sending an alert
   });
-}
+}//end appendListings
 
 
 function addListing() {
@@ -125,8 +127,8 @@ function addListing() {
     alertify.alert("Sussman Homes and Gardens says:","Please complete all fields.", function() {
       alertify.error('Listing not added');
     });//end alertify
-  }
-}
+  }//end else
+}//end addListing
 
 //removes "cost" or "rent" field -- for when opposite field is activated
 function hideCost() {
@@ -146,6 +148,17 @@ function nextPage() {
   window.alert("Over one weekend? On Week FOUR?! Nah man... sorry...");
 }
 
-function navToAdmin() {
-  
-}
+function adminAppend(response) {
+  console.log("adminAppend is working");
+  for (var i = 0; i < response.length; i++) {
+      $('.admin-container.container').append('<div class="row" id="propAdminView' + i + '"></div>');
+      var $el = $('#propAdminView' + i);
+      $el.append('<div class="col-md-3 admin-div"><p>' + response[i].sqft + ' square feet</p></div>');
+      $el.append('<div class="col-md-3 admin-div"><p>Located in ' + response[i].city + '</p></div>');
+      if (response[i].cost) {
+          $el.append('<div class="col-md-3 admin-div"><p>Cost to own: $' + response[i].cost + '</p></div>');
+      } else if (response[i].rent) {
+          $el.append('<div class="col-md-3 admin-div"><p>Monthly rent: $' + response[i].rent + '</p></div>');}
+      $el.append('<div class="col-md-3 admin-div"><button class="delete btn btn-sm btn-warning" data-buildingid="'+ response[i]._id+'">Delete</button></div>');
+   }//end for-loop
+ }//end adminAppend
