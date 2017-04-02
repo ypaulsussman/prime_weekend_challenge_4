@@ -20,6 +20,7 @@ function eventListeners(value) {
     $('#rent').on('keypress', hideCost);
     $('#cost').on('keypress', hideRent);
     $('#resetSell').on('click', reload);
+    $('.basket.container').on('click','#nextPageButton', nextPage);
   }else {
     $('#sellHome').off('submit', addListing);
     $('#rent').on('keypress', hideCost);
@@ -57,7 +58,7 @@ function appendListings(response) {
     if (response[i].cost) {
       $el.append('<div class="col-md-2 glyph-holder"><span class="glyphicon glyphicon-home"></span></div>');
     }else if (response[i].rent) {
-      $el.append('<div class="col-md-2 glyph-holder"><span class="glyphicon glyphicon-tower"></span></div>');
+      $el.append('<div class="col-md-2 glyph-holder"><span class="glyphicon glyphicon-list-alt"></span></div>');
     }
     index = getRandomAdjIndex(0, adjArray.length);
     adjective = adjArray[index];
@@ -65,15 +66,16 @@ function appendListings(response) {
     var size = response[i].sqft+' square feet!';
     if (response[i].cost) {
       var cost = 'Only $'+response[i].cost+' to own!';
-      $el.append('<button type="button" class="btn btn-sm btn-info cost col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+cost+'">Learn More!</button>');
+      $el.append('<button type="button" class="btn btn-sm btn-success cost col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+cost+'">Learn More!</button>');
     }else if (response[i].rent) {
       var rent = 'Only $'+response[i].rent+' a month!';
-      $el.append('<button type="button" class="btn btn-sm btn-info rent col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+rent+'">Learn More!</button>');
+      $el.append('<button type="button" class="btn btn-sm btn-success rent col-md-3" data-toggle="popover" data-trigger="focus" title="'+ size + '" data-content="'+rent+'">Learn More!</button>');
     }
   }
   $(function () {
     $('[data-toggle="popover"]').popover();
     $row.append('<div class="col-md-4 col-md-offset-2"><button type="submit" class="btn btn-primary" id="nextPageButton"><span id="npbText">More Super Deals!</span></button></div>');
+    //stretch goal: get button to do anything beside sending an alert
   });
 }
 
@@ -113,4 +115,8 @@ function hideRent() {
 
 function reload() {
   window.location.reload(true);
+}
+
+function nextPage() {
+  window.alert("Over one weekend? On Week FOUR?! Nah man... sorry...");
 }

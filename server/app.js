@@ -7,7 +7,7 @@ var path = require('path');
 //mongo requires
 var listings = require('./modules/listings.js');
 var mongoose = require('mongoose');
-var mongoURI = "mongodb://localhost:27017/realestate";
+var mongoURI = "mongodb://wc4user:susspass@ds161175.mlab.com:61175/weekend_challenge_4";
 var mongoDB = mongoose.connect(mongoURI).connection;
 
 

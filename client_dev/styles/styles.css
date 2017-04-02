@@ -9,6 +9,8 @@ h1{
   font-family: Tahoma, Geneva, sans-serif;
   text-align: center;
   margin-bottom: .5em;
+  /*color: #4e5766;*/
+  /*text-shadow:  -5px -5px 25px aliceblue,  5px 5px 25px aliceblue;*/
   color: aliceblue;
   text-shadow: 1px 1px 10px DarkOrange, -1px -1px 20px DeepPink;
   font-style: oblique;
@@ -44,12 +46,13 @@ h1{
 [id*="property"]{
   display: inline-flex;
   margin-bottom: 1.5em;
-  background-color: rgba(255,140,0,.75);
   border-radius: 5px;
   padding: 20px;
-  box-shadow: -5px -5px 25px DeepPink, 5px 5px 25px DeepPink;
   min-height: 8em;
-;
+  background-color: rgba(255,140,0,.75);
+  box-shadow: -5px -5px 25px DeepPink, 5px 5px 25px DeepPink;
+  /*background-color: skyblue;*/
+  /*box-shadow:  -5px -5px 25px #4e5766,  5px 5px 25px #4e5766;*/
 }
 
 .body-listings{
@@ -64,9 +67,11 @@ h1{
 .location{
   margin: auto;
   font-family: Tahoma, Geneva, sans-serif;
+  font-weight:bold;
   font-size: 1.25em;
   text-indent: -1em;
   text-align: right;
+
 }
 
 .col-md-2 .glyphicon{
@@ -74,13 +79,13 @@ h1{
   font-size: 2em;
 }
 
-.btn-info.rent,.btn-info.cost{
-  color: #fffbe8;
+.btn-success.rent,.btn-success.cost{
   font-style: oblique;
   font-size: 1em;
   text-indent: -.5em;
   font-family: Tahoma, Geneva, sans-serif;
-  text-shadow: 1px 1px 10px DeepPink, 1px 1px 30px DarkOrange;
+  /*color: #fffbe8;
+  text-shadow: 1px 1px 10px DeepPink, 1px 1px 30px DarkOrange;*/
 }
 
 .popover-title {
@@ -98,7 +103,7 @@ h1{
 #nextPageButton{
   float: right;
   min-height: 8em;
-  width: 100%
+  width: 100%;
 }
 
 #npbText{
