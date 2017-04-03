@@ -88,7 +88,7 @@ function appendListings(response) {
   //adds button to display more listings
   $(function () {
     $('[data-toggle="popover"]').popover();
-    $row.append('<div class="col-md-4 col-md-offset-2"><button type="submit" class="btn btn-primary" id="nextPageButton"><span id="npbText">More Super Deals!</span></button></div>');
+    $row.append('<div class="col-md-4 col-md-offset-2"><button type="submit" class="btn btn-info" id="nextPageButton"><span id="npbText">More Super Deals!</span></button></div>');
     //stretch goal: get button to do anything beside sending an alert
   });
 }//end appendListings

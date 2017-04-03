@@ -49,8 +49,8 @@ h1{
   border-radius: 5px;
   padding: 20px;
   min-height: 8em;
-  background-color: rgba(255,140,0,.75);
   box-shadow: -5px -5px 25px DeepPink, 5px 5px 25px DeepPink;
+  background: linear-gradient(135deg, rgba(255,193,127,.8) 0%,rgba(255,131,0,.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   /*background-color: skyblue;*/
   /*box-shadow:  -5px -5px 25px #4e5766,  5px 5px 25px #4e5766;*/
 }
@@ -89,13 +89,17 @@ h1{
   font-size: 2em;
 }
 
-.btn-info.rent,.btn-info.cost{
+.btn-info.rent,.btn-info.cost,#nextPageButton{
   font-style: oblique;
   font-size: 1em;
   text-indent: -.5em;
   font-family: Tahoma, Geneva, sans-serif;
   color: #fffbe8;
   text-shadow: 1px 1px 10px DeepPink, 1px 1px 30px DarkOrange;
+}
+
+.btn-info.rent,.btn-info.cost{
+  box-shadow: 1px 1px 10px #fffbe8, -1px -1px 10px #4e5766, inset 1px 1px 10px #fffbe8, inset -1px -1px 10px #4e5766;
 }
 
 .popover-title {
@@ -114,6 +118,7 @@ h1{
   float: right;
   min-height: 8em;
   width: 100%;
+  box-shadow: -5px -5px 25px DeepPink, 5px 5px 25px DeepPink;
 }
 
 #npbText{
