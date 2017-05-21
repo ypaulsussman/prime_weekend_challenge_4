@@ -18,9 +18,7 @@ In the `app.js` file, you'll need to replace the `mongoURI` string with the URI 
 ## Learning Value
 Firstly, I'd like to apologize to all visitors for the orange and pink drop-shadows across the buyers page: I got into a discussion with a colleague about how to make the most effervescently untrustworthy sales site, and by the time the CSS had settled… it was already too late.
 
-This was my first chance to really run free with exploring the uses of a NoSQL database, and at a stage where I had become quite comfortable with jQuery... so, naturally, I spent much of the weekend wrestling with Bootstrap and styling.
-
-Not to do that is, perhaps, a valuable lesson in it self--but preventing UI components from worming their way into the foreground of the project is hardly a new concern of mine. (Though I'd like to think it's one I've mastered in the weeks since.)
+This was my first chance to really run free with exploring the uses of a NoSQL database, and at a stage where I had become quite comfortable with jQuery... so, naturally, I spent much of the weekend wrestling with Bootstrap. Sigh. (Not to let styling worm its way to the front of your project timeline is, I suppose, a valuable lesson in itself.)
 
 I did learn much more of Bootstrap's functionality in this project, especially its JavaScript features like modals and popovers. Having become familiar with SweetAlert2 in the week prior, and thus wanting to explore a different alerts library, I found it very useful practice to sift through and evaluate the various available vendor options.
 
